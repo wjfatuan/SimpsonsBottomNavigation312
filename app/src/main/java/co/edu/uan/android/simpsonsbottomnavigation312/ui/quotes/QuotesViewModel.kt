@@ -22,7 +22,7 @@ class QuotesViewModel : ViewModel() {
     fun refreshQuote() {
         viewModelScope.launch {
             val api = SimpsonsQuotesApi.getInstance()
-            val data = api.quotes()
+            val data = api.quotes(1)
             character.value = data[0].character
             quote.value = data[0].quote
             image.value = data[0].image

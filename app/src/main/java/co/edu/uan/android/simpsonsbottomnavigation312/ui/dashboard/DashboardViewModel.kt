@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.edu.uan.android.simpsonsbottomnavigation312.database.Cat
 import co.edu.uan.android.simpsonsbottomnavigation312.database.CatsDatabase
+import co.edu.uan.android.simpsonsbottomnavigation312.database.SimpsonCharacter
+import co.edu.uan.android.simpsonsbottomnavigation312.database.SimpsonsDatabase
 import co.edu.uan.android.simpsonsbottomnavigation312.services.CatsApi
 import kotlinx.coroutines.launch
 
@@ -29,6 +31,14 @@ class DashboardViewModel(val ctx: Application) : AndroidViewModel(ctx) {
         viewModelScope.launch {
             val c = catsApi.search(3)
             cats.value = c.asList()
+        }
+    }
+
+    fun initializeCharacters() {
+        viewModelScope.launch {
+            val db = SimpsonsDatabase.getInstance(ctx)
+            db.characterDao().create(SimpsonCharacter("bart","hhh","Soy Bart Simpson"))
+            db.characterDao().create(SimpsonCharacter("homer","hhh","Soy Homer Simpson"))
         }
     }
 }

@@ -30,6 +30,7 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        //dashboardViewModel.initializeCharacters()
         dashboardViewModel.loadCats()
         dashboardViewModel.saveCats()
         dashboardViewModel.cats.observe(viewLifecycleOwner) {

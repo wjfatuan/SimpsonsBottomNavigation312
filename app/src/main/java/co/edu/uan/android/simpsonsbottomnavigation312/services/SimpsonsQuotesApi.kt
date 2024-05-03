@@ -3,11 +3,12 @@ package co.edu.uan.android.simpsonsbottomnavigation312.services
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface SimpsonsQuotesApi {
 
     @GET("quotes")
-    suspend fun quotes(): List<Quote>
+    suspend fun quotes(@Query("count") n: Int): List<Quote>
 
     companion object {
 
