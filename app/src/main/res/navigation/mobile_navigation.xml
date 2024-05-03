@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="co.edu.uan.android.simpsonsbottomnavigation312.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_quotes"
+        android:name="co.edu.uan.android.simpsonsbottomnavigation312.ui.quotes.QuotesFragment"
+        android:label="@string/title_quotes"
+        tools:layout="@layout/fragment_quotes" />
 </navigation>

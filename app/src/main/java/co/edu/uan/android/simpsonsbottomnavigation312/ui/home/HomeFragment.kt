@@ -38,8 +38,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.viewmodel = homeViewModel
+        binding.lifecycleOwner = this
+
 
         refreshData(homeViewModel)
+        binding.btnChangeText.setOnClickListener {
+            homeViewModel.changeText()
+        }
         return root
     }
 
@@ -52,7 +57,6 @@ class HomeFragment : Fragment() {
         Picasso.get()
             .load(model.logo)
             .into(binding.imageView)
-//        binding.simpsonsHistory.text = model.history
     }
 
     fun moveThis() {

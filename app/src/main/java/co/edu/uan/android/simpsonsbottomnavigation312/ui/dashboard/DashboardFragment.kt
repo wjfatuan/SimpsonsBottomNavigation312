@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import co.edu.uan.android.simpsonsbottomnavigation312.databinding.FragmentDashboardBinding
+import com.squareup.picasso.Picasso
 
 class DashboardFragment : Fragment() {
 
@@ -17,26 +18,41 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    lateinit var dashboardViewModel: DashboardViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
+        dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        dashboardViewModel.loadCats()
+        dashboardViewModel.saveCats()
+        dashboardViewModel.cats.observe(viewLifecycleOwner) {
+            updateImages()
         }
+
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun updateImages() {
+        binding.catsContainer.removeAllViews()
+        for(cat in dashboardViewModel.cats.value!!) {
+            val iv = ImageView(this.requireActivity())
+            Picasso.get()
+                .load(cat.url)
+                .into(iv)
+            binding.catsContainer.addView(iv)
+        }
     }
 }
